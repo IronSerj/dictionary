@@ -13,4 +13,15 @@ class Translation < ActiveRecord::Base
   def save
     super if Translation.find_by_text(self.text) == nil
   end
+
+  def self.from_articles_arr(arr, lang)
+    translations = Array.new
+    arr.each do |a|
+      hash = a.to_hash
+      hash["lang"] = lang
+      translations << Translation.new(hash)
+    end
+    translations[0].save unless translations.size == 0
+    translations
+  end
 end
