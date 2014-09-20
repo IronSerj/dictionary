@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lang: MyString
+  text: MyString
+  translations: MyString
+  synonyms: MyString
+  means: MyString
+  examples: MyString
+
+two:
+  lang: MyString
+  text: MyString
+  translations: MyString
+  synonyms: MyString
+  means: MyString
+  examples: MyString

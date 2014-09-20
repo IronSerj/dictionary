@@ -1,8 +1,8 @@
 <h1>Welcome to dictionary!</h1>
 <p>
   <p>Supported languages:</p>
-	<% @langs.each do |lang| %>
-    <tp> <%= "#{lang}, " %> </tp>
+	<% $langs.each do |lang| %>
+    <tp> <%= "#{lang},\t" %> </tp>
   <% end %>
 </p>
 
@@ -20,4 +20,22 @@
   <p>
     <%= i.submit %>
   </p>
+<% end %>
+
+<% unless @prms == nil %>
+  <tp> Interpretations: </tp>
+  <% @translations.each do |t| %>
+    <p>
+      <%= text_area_tag(:message, t.to_string, size: "60x7") %>
+    </p>
+  <% end %>
+<% end %>
+
+<% unless @history.size == 0 %>
+  <tp> History of interpretations: </tp>
+  <% @history.each do |t| %>
+    <p>
+      <%= text_area_tag(:message, t.to_string, size: "60x7") %>
+    </p>
+  <% end %>
 <% end %>
