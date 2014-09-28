@@ -6,36 +6,8 @@
   <% end %>
 </p>
 
-<%= form_for :interpretation do |i| %>
-  <p>
-    <%= i.label :lang %><br>
-    <%= i.text_field :lang %>
-  </p>
- 
-  <p>
-    <%= i.label :text %><br>
-    <%= i.text_area :text %>
-  </p>
- 
-  <p>
-    <%= i.submit %>
-  </p>
-<% end %>
+<%= render partial: "interpretation_request_form"%>
 
-<% unless @prms == nil %>
-  <tp> Interpretations: </tp>
-  <% @translations.each do |t| %>
-    <p>
-      <%= text_area_tag(:message, t.to_string, size: "60x7") %>
-    </p>
-  <% end %>
-<% end %>
+<%= render partial: "interpretations", locals: {title: "Interpretations: ", interpretations: @translations} %>
 
-<% unless @history.size == 0 %>
-  <tp> History of interpretations: </tp>
-  <% @history.each do |t| %>
-    <p>
-      <%= text_area_tag(:message, t.to_string, size: "60x7") %>
-    </p>
-  <% end %>
-<% end %>
+<%= render partial: "interpretations", locals: {title: "History of interpretations: ", interpretations: @history} %>

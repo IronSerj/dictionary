@@ -1,0 +1,8 @@
+<% unless interpretations.size == 0 %>
+  <tp> <%= title %> </tp>
+  <% interpretations.each do |i| %>
+    <p>
+      <%= text_area_tag(:message, i.to_string, size: "60x7") %>
+    </p>
+  <% end %>
+<% end %>

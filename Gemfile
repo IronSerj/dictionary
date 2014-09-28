@@ -28,6 +28,10 @@ gem 'spring',        group: :development
 
 gem 'yandex_dictionary_api'
 
+gem 'draper'
+
+gem 'authlogic', '>= 3.4.2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

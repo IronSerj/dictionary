@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140920215826) do
+ActiveRecord::Schema.define(version: 20140920222605) do
 
   create_table "translations", force: true do |t|
     t.string   "lang"
@@ -20,6 +20,20 @@ ActiveRecord::Schema.define(version: 20140920215826) do
     t.string   "synonyms"
     t.string   "means"
     t.string   "examples"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_sessions", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "login"
+    t.string   "password"
+    t.string   "password_confirmation"
+    t.boolean  "persistence_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

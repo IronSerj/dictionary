@@ -1,7 +1,7 @@
 class DictionaryController < ApplicationController
-
   def index
-    @history = Translation.all
+    @translations = Array.new
+    @history = TranslationDecorator.decorate_collection(Translation.all)
   end
 
   def interpret
@@ -9,8 +9,7 @@ class DictionaryController < ApplicationController
     articles = $api.lookup_arr(@prms)
 
     @translations = Translation.from_articles_arr(articles, @prms["lang"])
-    @history = Translation.all
+    @history = TranslationDecorator.decorate_collection(Translation.all)
     render 'index'
   end
-
 end

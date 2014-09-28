@@ -1,0 +1,15 @@
+<%= form_for :interpretation do |i| %>
+  <p>
+    <%= i.label :lang %><br>
+    <%= i.text_field :lang %>
+  </p>
+ 
+  <p>
+    <%= i.label :text %><br>
+    <%= i.text_area :text %>
+  </p>
+ 
+  <p>
+    <%= i.submit %>
+  </p>
+<% end %>
