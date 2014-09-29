@@ -1,9 +1,5 @@
 class Translation < ActiveRecord::Base
 
-  def before_validation
-    Translation.find_by_text(self.text) == nil
-  end
-
   def self.from_articles_arr(arr, lang)
     translations = Array.new
     hash = Hash.new
