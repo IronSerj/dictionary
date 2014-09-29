@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get '/dictionary' => 'dictionary#index'
 
-  post '/dictionary' => 'dictionary#interpret'
+  post '/dictionary' => 'dictionary#index'
 
   get '/new_user_session' => 'user_sessions#new'
   post '/new_user_session' => 'user_sessions#create'

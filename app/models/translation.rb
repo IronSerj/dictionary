@@ -15,8 +15,8 @@ class Translation < ActiveRecord::Base
       hash["means"] = a.means
       hash["examples"] = a.examples
       translations << TranslationDecorator.new(Translation.new(hash))
+      translations[translations.size - 1].save
     end
-    translations[0].save unless translations.size == 0
     translations
   end
 end

@@ -1,22 +1,24 @@
 class DictionaryController < ApplicationController
-  before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => :destroy
+  helper_method :history_of_interpretations, :interpretations, :langs
 
   def index
     require_user
-    @user = @current_user
-    @translations = Array.new
-    @history = TranslationDecorator.decorate_collection(Translation.all)
   end
 
-  def interpret
-    require_user
-    @user = @current_user
-    @prms = params[:interpretation]
-    articles = $api.lookup_arr(@prms)
+  private
+    def history_of_interpretations
+      TranslationDecorator.decorate_collection(Translation.all)
+    end
 
-    @translations = Translation.from_articles_arr(articles, @prms["lang"])
-    @history = TranslationDecorator.decorate_collection(Translation.all)
-    render 'index'
-  end
+    def interpretations
+      if params[:interpretation]
+        Translation.from_articles_arr($api.lookup_arr(params[:interpretation]), params[:interpretation][:lang])
+      else
+        Array.new
+      end
+    end
+
+    def langs
+      $langs
+    end
 end
