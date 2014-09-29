@@ -32,6 +32,8 @@ gem 'draper'
 
 gem 'authlogic', '>= 3.4.2'
 
+gem 'scrypt'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

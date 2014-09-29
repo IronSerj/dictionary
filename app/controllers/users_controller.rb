@@ -26,9 +26,9 @@ class UsersController < ApplicationController
   
   def update
     @user = @current_user
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       flash[:notice] = "Account updated!"
-      redirect_to account_url
+      redirect_to user_url
     else
       render :action => :edit
     end
@@ -37,6 +37,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:login, :password, :password_confirmation, :persistence_token)
+    params.require(:user).permit(:login, :password, :password_confirmation)
   end
 end

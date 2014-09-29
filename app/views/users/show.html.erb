@@ -33,5 +33,6 @@
   <%=h @user.current_login_ip %>
 </p>
 
-
-<%= link_to 'Edit', edit_user_path %>
+<p> <%= link_to 'Dictionary', dictionary_path %> </p>
+<p> <%= link_to 'Edit', edit_user_path %> </p>
+<p> <%= link_to "Logout", user_session_path, :method => :delete %></p>

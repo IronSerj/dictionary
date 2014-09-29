@@ -1,4 +1,6 @@
-<h1>Welcome to dictionary!</h1>
+<h1>Welcome to dictionary, <%= @user.login %>!</h1>
+<p> <%= link_to "My Profile", user_path %> </p>
+<p> <%= link_to "Logout", user_session_path, :method => :delete %> </p>
 <p>
   <p>Supported languages:</p>
 	<% $langs.each do |lang| %>

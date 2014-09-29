@@ -7,11 +7,13 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'user_sessions#new'
 
-  post '/' => 'dictionary#interpret'
+  get '/dictionary' => 'dictionary#index'
+
+  post '/dictionary' => 'dictionary#interpret'
 
   get '/new_user_session' => 'user_sessions#new'
-
   post '/new_user_session' => 'user_sessions#create'
+  delete '/user_session' => 'user_sessions#destroy'
 
   get '/new_user' => 'users#new'
   post '/new_user' => 'users#create'
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
   get '/user' => 'users#show'
   patch '/user' => 'users#update'
   put '/user' => 'users#update'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
