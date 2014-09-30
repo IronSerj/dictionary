@@ -2,14 +2,10 @@
 <p> <%= link_to "My Profile", user_path(current_user) %> </p>
 <p> <%= link_to "Logout", session_path, :method => :delete %> </p>
 <p>
-  <p>Supported languages:</p>
-	<% langs.each do |lang| %>
-    <tp> <%= "#{lang},\t" %> </tp>
-  <% end %>
 </p>
 
 <%= render partial: "interpretation_request_form"%>
-
-<%= render partial: "interpretations", locals: {title: "Interpretations: ", interpretations: interpretations} %>
-
-<%= render partial: "interpretations", locals: {title: "History of interpretations: ", interpretations: history_of_interpretations} %>
+<p> Interpretations: </p>
+<%= render partial: "interpretations", locals: {interpretations: interpretations} %>
+<p> History of interpretations:  </p>
+<%= render partial: "interpretations", locals: {interpretations: history_of_interpretations} %>

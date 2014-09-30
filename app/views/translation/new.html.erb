@@ -1,4 +1,6 @@
-<%= form_for :interpretation do |i| %>
+<h1>New interpretation</h1>
+
+<%= form_for :interpretation, url: user_translation_index_path(current_user) do |i| %>
   <p>
     <%= i.label :lang %><br>
     <%= i.select("lang", $langs) %>

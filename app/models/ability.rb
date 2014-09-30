@@ -2,8 +2,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :update, User do |subject|
-      user.id == subject.id
+    can :update, User do |subj|
+      subj.id == user.id
+    end
+
+    can :update, Translation do |subj|
+      subj.user_id == user.id
     end
     # Define abilities for the passed in user here. For example:
     #

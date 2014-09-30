@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   end
 
   def init_verification
+  	self.update_attributes(:is_registration_confirmed => false)
     UserMailer.verification_email(self).deliver
   end
 

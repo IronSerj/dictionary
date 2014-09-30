@@ -13,8 +13,6 @@ class DictionaryController < ApplicationController
     def interpretations
       if params[:interpretation]
         Translation.from_articles_arr($api.lookup_arr(params[:interpretation]), params[:interpretation][:lang], current_user)
-      else
-        Array.new
       end
     end
 

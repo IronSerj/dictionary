@@ -38,4 +38,9 @@ class ApplicationController < ActionController::Base
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end
+
+    def requested_user_by_id(id)
+      return @requested_user if defined?(@requested_user)
+      @requested_user = User.find(id)
+    end
 end

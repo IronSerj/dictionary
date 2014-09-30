@@ -15,15 +15,10 @@ Rails.application.routes.draw do
   post '/login' => 'user_sessions#create'
   delete '/login' => 'user_sessions#destroy'
 
-  get '/user/verification' => 'users#verification'
-  get '/user/new' => 'users#new', as: 'new_user'
-  get '/user' => 'user_sessions#new', as: 'users'
-  post '/user' => 'users#create', as: 'create_user'
-  
-  get '/user/:id/edit' => 'users#edit', as: 'edit_user'
-  get '/user/:id' => 'users#show', as: 'user'
-  patch '/user/:id' => 'users#update'
-  put '/user/:id' => 'users#update'
+  resources :user do
+    resources :translation
+  end
+  get '/user/verification/:token' => 'user#verification', as: 'verification'
 
 
   # Example of regular route:

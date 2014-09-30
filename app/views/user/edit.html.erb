@@ -2,6 +2,9 @@
 
 <%= form_for :user, :url => user_path, :method => :patch, builder: StandardBuilder do |f| %>
   <%= f.error_messages %>
+  <%= f.label "Current password" %><br />
+  <%= f.password_field :current_password %><br />
+  <br />
   <%= render :partial => "form", :object => f %>
   <%= f.submit "Update" %>
 <% end %>

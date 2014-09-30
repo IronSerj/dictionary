@@ -38,6 +38,8 @@ gem 'letter_opener', :group => :development
 
 gem 'cancancan'
 
+gem 'carrierwave'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

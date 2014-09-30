@@ -1,0 +1,4 @@
+<p>Lang: <%= tr.lang %></p>
+<p>Text: <%= tr.text %></p>
+<p> <%= link_to "Show", user_translation_path(requested_user, tr) %> </p>
+<p> <%= link_to "Delete", user_translation_path(requested_user, tr), :method => :delete %> </p>
