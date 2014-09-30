@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :translations, dependent: :destroy
   acts_as_authentic
+  mount_uploader :avatar, AvatarUploader
 
   def initialize(params)
     super(params)
@@ -11,5 +12,4 @@ class User < ActiveRecord::Base
   	self.update_attributes(:is_registration_confirmed => false)
     UserMailer.verification_email(self).deliver
   end
-
 end

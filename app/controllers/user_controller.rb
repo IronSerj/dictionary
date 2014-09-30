@@ -61,6 +61,6 @@ class UserController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:login, :password, :password_confirmation, :email).delete_if {|key, value| value == ""}
+    params.require(:user).permit(:login, :password, :password_confirmation, :email, :avatar).delete_if {|key, value| value == ""}
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140920222605) do
+ActiveRecord::Schema.define(version: 20140930192824) do
 
   create_table "translations", force: true do |t|
     t.integer  "user_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140920222605) do
     t.string   "current_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar"
   end
 
 end

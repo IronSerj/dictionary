@@ -3,6 +3,11 @@
     <p> EMAIL NOT VERIFIED! </p>
   <% end %>
 <% end %>
+
+<p>
+  <img src= <%= "#{requested_user.avatar.url}" %>>
+</p>
+
 <p>
   <b>Login:</b>
   <%= requested_user.login %>
@@ -48,10 +53,5 @@
   <p> 
     <%= link_to "Edit #{requested_user.login}", edit_user_path(requested_user) %> 
   </p>
-<% else %>
-  <p> 
-    <%= link_to "My Profile", user_path(current_user) %>
-  </p>
 <% end %>
-<p> <%= link_to "Logout", session_path, :method => :delete %></p>
 <p> <%= link_to "Translations", user_translation_index_path(current_user) %></p>

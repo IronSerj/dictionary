@@ -1,8 +1,4 @@
 <h1>Welcome to dictionary, <%= current_user.login %>!</h1>
-<p> <%= link_to "My Profile", user_path(current_user) %> </p>
-<p> <%= link_to "Logout", session_path, :method => :delete %> </p>
-<p>
-</p>
 
 <%= render partial: "interpretation_request_form"%>
 <p> Interpretations: </p>
