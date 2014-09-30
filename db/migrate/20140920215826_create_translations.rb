@@ -1,6 +1,7 @@
 class CreateTranslations < ActiveRecord::Migration
   def change
     create_table :translations do |t|
+      t.integer :user_id
       t.string :lang
       t.string :text
       t.string :translations

@@ -3,6 +3,9 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :login, :null => false
       t.string :crypted_password, :null => false
+      t.string :email, :null => false
+      t.boolean :is_registration_confirmed, :default => false
+      t.string :verification_token, :default => :verification_token, :null => false
       t.string :password_salt, :null => false
       t.string :persistence_token, :null => false
       t.integer :login_count, :default => 0, :null => false

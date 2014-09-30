@@ -1,17 +1,26 @@
 class UsersController < ApplicationController
-  
+  helper_method :requested_user
+
   def new
     require_no_user
+    
   end
   
   def create
     require_no_user
     if User.new(user_params).save
       flash[:notice] = "Account registered!"
-      redirect_back_or_default user_url
+      UserMailer.verification_email(User.find_by(login: user_params[:login])).deliver
+      render 'registration_finished'
     else
       render :action => :new
     end
+  end
+
+  def verification
+    user = User.find_by(verification_token: params[:verification_token])
+    user.update_attributes(:is_registration_confirmed => true)
+    redirect_to session_path
   end
   
   def show
@@ -34,7 +43,16 @@ class UsersController < ApplicationController
 
   private
 
+  def requested_user
+    if current_user.id == params[:id]
+      current_user
+    else
+      return @requested_user if defined?(@requested_user)
+      @requested_user = User.find(params[:id])
+    end
+  end
+
   def user_params
-    params.require(:user).permit(:login, :password, :password_confirmation)
+    params.require(:user).permit(:login, :password, :password_confirmation, :email)
   end
 end

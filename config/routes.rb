@@ -11,17 +11,19 @@ Rails.application.routes.draw do
 
   post '/dictionary' => 'dictionary#index'
 
-  get '/new_user_session' => 'user_sessions#new'
-  post '/new_user_session' => 'user_sessions#create'
-  delete '/user_session' => 'user_sessions#destroy'
+  get '/login' => 'user_sessions#new', as: 'session'
+  post '/login' => 'user_sessions#create'
+  delete '/login' => 'user_sessions#destroy'
 
-  get '/new_user' => 'users#new'
-  post '/new_user' => 'users#create'
+  get '/user/verification' => 'users#verification'
+  get '/user/new' => 'users#new', as: 'new_user'
+  get '/user' => 'user_sessions#new', as: 'users'
+  post '/user' => 'users#create', as: 'create_user'
   
-  get '/edit_user' => 'users#edit'
-  get '/user' => 'users#show'
-  patch '/user' => 'users#update'
-  put '/user' => 'users#update'
+  get '/user/:id/edit' => 'users#edit', as: 'edit_user'
+  get '/user/:id' => 'users#show', as: 'user'
+  patch '/user/:id' => 'users#update'
+  put '/user/:id' => 'users#update'
 
 
   # Example of regular route:

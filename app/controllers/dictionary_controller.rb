@@ -7,12 +7,12 @@ class DictionaryController < ApplicationController
 
   private
     def history_of_interpretations
-      TranslationDecorator.decorate_collection(Translation.all)
+      TranslationDecorator.decorate_collection(current_user.translations)
     end
 
     def interpretations
       if params[:interpretation]
-        Translation.from_articles_arr($api.lookup_arr(params[:interpretation]), params[:interpretation][:lang])
+        Translation.from_articles_arr($api.lookup_arr(params[:interpretation]), params[:interpretation][:lang], current_user)
       else
         Array.new
       end

@@ -1,38 +1,46 @@
+<% unless requested_user.is_registration_confirmed %>
+  <p> ACCOUNT NOT VERIFIED! </p>
+<% end %>
 <p>
   <b>Login:</b>
-  <%= current_user.login %>
+  <%= requested_user.login %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= requested_user.email %>
 </p>
 
 <p>
   <b>Login count:</b>
-  <%= current_user.login_count %>
+  <%= requested_user.login_count %>
 </p>
 
 <p>
   <b>Last request at:</b>
-  <%= current_user.last_request_at %>
+  <%= requested_user.last_request_at %>
 </p>
 
 <p>
   <b>Last login at:</b>
-  <%= current_user.last_login_at %>
+  <%= requested_user.last_login_at %>
 </p>
 
 <p>
   <b>Current login at:</b>
-  <%= current_user.current_login_at %>
+  <%= requested_user.current_login_at %>
 </p>
 
 <p>
   <b>Last login ip:</b>
-  <%= current_user.last_login_ip %>
+  <%= requested_user.last_login_ip %>
 </p>
 
 <p>
   <b>Current login ip:</b>
-  <%= current_user.current_login_ip %>
+  <%= requested_user.current_login_ip %>
 </p>
 
 <p> <%= link_to 'Dictionary', dictionary_path %> </p>
-<p> <%= link_to 'Edit', edit_user_path %> </p>
-<p> <%= link_to "Logout", user_session_path, :method => :delete %></p>
+<p> <%= link_to "Edit #{current_user.login}", edit_user_path(current_user) %> </p>
+<p> <%= link_to "Logout", session_path, :method => :delete %></p>
