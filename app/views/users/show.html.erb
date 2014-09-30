@@ -1,5 +1,7 @@
-<% unless requested_user.is_registration_confirmed %>
-  <p> ACCOUNT NOT VERIFIED! </p>
+<% if can? :update, requested_user %>
+  <% unless requested_user.is_registration_confirmed %>
+    <p> ACCOUNT NOT VERIFIED! </p>
+  <% end %>
 <% end %>
 <p>
   <b>Login:</b>
@@ -42,5 +44,13 @@
 </p>
 
 <p> <%= link_to 'Dictionary', dictionary_path %> </p>
-<p> <%= link_to "Edit #{current_user.login}", edit_user_path(current_user) %> </p>
+<% if can? :update, requested_user %>
+  <p> 
+    <%= link_to "Edit #{requested_user.login}", edit_user_path(requested_user) %> 
+  </p>
+<% else %>
+  <p> 
+    <%= link_to "My Profile", user_path(current_user) %>
+  </p>
+<% end %>
 <p> <%= link_to "Logout", session_path, :method => :delete %></p>

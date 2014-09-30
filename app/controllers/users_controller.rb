@@ -8,9 +8,10 @@ class UsersController < ApplicationController
   
   def create
     require_no_user
-    if User.new(user_params).save
+    user = User.new(user_params)
+    if user.save
+      user.init_verification
       flash[:notice] = "Account registered!"
-      UserMailer.verification_email(User.find_by(login: user_params[:login])).deliver
       render 'registration_finished'
     else
       render :action => :new
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
   def verification
     user = User.find_by(verification_token: params[:verification_token])
     user.update_attributes(:is_registration_confirmed => true)
-    redirect_to session_path
+    render 'verification_succeded'
   end
   
   def show
@@ -29,11 +30,13 @@ class UsersController < ApplicationController
 
   def edit
     require_user
+    authorize! :update, requested_user
   end
   
   def update
     require_user
-    if current_user.update_attributes(user_params)
+    authorize! :update, requested_user
+    if requested_user.update_attributes(user_params)
       flash[:notice] = "Account updated!"
       redirect_to user_url
     else
@@ -44,12 +47,8 @@ class UsersController < ApplicationController
   private
 
   def requested_user
-    if current_user.id == params[:id]
-      current_user
-    else
-      return @requested_user if defined?(@requested_user)
-      @requested_user = User.find(params[:id])
-    end
+    return @requested_user if defined?(@requested_user)
+    @requested_user = User.find(params[:id])
   end
 
   def user_params
