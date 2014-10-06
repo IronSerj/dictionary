@@ -1,7 +1,0 @@
-<h1>Welcome to dictionary, <%= current_user.login %>!</h1>
-
-<%= render partial: "interpretation_request_form"%>
-<p> Interpretations: </p>
-<%= render partial: "interpretations", locals: {interpretations: interpretations} %>
-<p> History of interpretations:  </p>
-<%= render partial: "interpretations", locals: {interpretations: history_of_interpretations} %>

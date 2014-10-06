@@ -1,12 +1,13 @@
 class UserSessionsController < ApplicationController
-  
+  helper_method :user_session
   def new
     require_no_user
   end
   
   def create
     require_no_user
-    if UserSession.new(params[:user_session]).save
+    @user_session = UserSession.new(params[:user_session])
+    if @user_session.save
       flash[:notice] = "Login successful!"
       redirect_back_or_default session_path
     else
@@ -19,5 +20,11 @@ class UserSessionsController < ApplicationController
     current_user_session.destroy
     flash[:notice] = "Logout successful!"
     redirect_back_or_default session_path
+  end
+
+private
+  def user_session
+    return @user_session if defined?(@user_session)
+    @user_session = UserSession.new
   end
 end

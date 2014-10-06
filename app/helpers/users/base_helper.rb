@@ -1,0 +1,2 @@
+module Users::BaseHelper
+end

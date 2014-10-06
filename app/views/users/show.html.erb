@@ -1,5 +1,5 @@
 <% if can? :update, requested_user %>
-  <% unless requested_user.is_registration_confirmed %>
+  <% unless requested_user.registration_confirmed %>
     <p> EMAIL NOT VERIFIED! </p>
   <% end %>
 <% end %>
@@ -48,10 +48,9 @@
   <%= requested_user.current_login_ip %>
 </p>
 
-<p> <%= link_to 'Dictionary', dictionary_path %> </p>
 <% if can? :update, requested_user %>
   <p> 
     <%= link_to "Edit #{requested_user.login}", edit_user_path(requested_user) %> 
   </p>
 <% end %>
-<p> <%= link_to "Translations", user_translation_index_path(current_user) %></p>
+<p> <%= link_to "Translations", user_translations_path(current_user) %></p>

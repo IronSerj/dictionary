@@ -1,17 +1,20 @@
 class Translation < ActiveRecord::Base
+  include  ActiveModel::MassAssignmentSecurity
   belongs_to :user
+  attr_protected :lang, :text
+  attr_accessible :lang, :text, :translations, :synonyms, :means, :examples, :as => :translation
 
-  def self.from_articles_arr(arr, lang, user)
+  def self.get_translations(params, user)
     translations = Array.new
     hash = Hash.new
-    arr.each do |a|
-      hash["lang"] = lang
-      hash["text"] = a.text
-      hash["translations"] = a.translations
-      hash["synonyms"] = a.synonyms
-      hash["means"] = a.means
-      hash["examples"] = a.examples
-      translations << TranslationDecorator.new(Translation.new(hash))
+    $api.lookup_arr(params).each do |translation|
+      hash["lang"] = params["lang"]
+      hash["text"] = translation.text
+      hash["translations"] = translation.translations
+      hash["synonyms"] = translation.synonyms
+      hash["means"] = translation.means
+      hash["examples"] = translation.examples
+      translations << TranslationDecorator.new(Translation.new(hash, :as => :translation))
       translations[translations.size - 1].user = user
       translations[translations.size - 1].save
     end

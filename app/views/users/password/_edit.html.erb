@@ -1,0 +1,15 @@
+<%= form_for requested_user, :url => password_path(requested_user), builder: StandardBuilder do |form| %>
+  <%= form.error_messages %>
+  <%= form.label :current_password %><br />
+  <%= form.password_field :current_password %><br />
+  <br />
+  <%= form.label :email %><br />
+  <%= form.text_field :email %><br />
+  <br />
+  <%= form.label :password %><br />
+  <%= form.password_field :password %><br />
+  <br />
+  <%= form.label :password_confirmation %><br />
+  <%= form.password_field :password_confirmation %><br />
+  <%= form.submit "Update" %>
+<% end %>

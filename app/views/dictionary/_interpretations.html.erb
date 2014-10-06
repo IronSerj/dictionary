@@ -1,9 +1,0 @@
-<% unless interpretations == nil %>
-  <% interpretations.each do |i| %>
-    <p>
-      <%= text_area_tag(:message, i.to_string, size: "60x7") %>
-    </p>
-  <% end %>
-<% else %>  
-  <p> There is no interpretations yet.</p>
-<% end %>

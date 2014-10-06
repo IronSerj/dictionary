@@ -7,18 +7,17 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'user_sessions#new'
 
-  get '/dictionary' => 'dictionary#index'
-
-  post '/dictionary' => 'dictionary#index'
-
   get '/login' => 'user_sessions#new', as: 'session'
   post '/login' => 'user_sessions#create'
   delete '/login' => 'user_sessions#destroy'
 
-  resources :user do
-    resources :translation
+  resources :users do
+    scope module: 'users' do
+      resources :translations
+    end
   end
-  get '/user/verification/:token' => 'user#verification', as: 'verification'
+  get '/users/verification/:token' => 'users#verify', as: 'verification'
+  patch '/users/:id/password' => 'users/password#update', as: 'password'
 
 
   # Example of regular route:

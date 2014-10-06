@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DictionaryControllerTest < ActionController::TestCase
+class Users::BaseControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

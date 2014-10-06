@@ -1,0 +1,20 @@
+<h1>Edit My Account</h1>
+
+
+<%= form_for requested_user, :url => user_path(requested_user), builder: StandardBuilder do |f| %>
+  <%= f.error_messages %>
+  <br />
+  <%= f.label "Login" %><br />
+  <%= f.text_field :login %><br />
+  <br />
+  <%= f.label "Avatar" %><br />
+  <%= f.file_field :avatar %><br />
+  <br />
+  <%= f.submit "Update" %>
+<% end %>
+<br />
+<p> ================================================================================================== </p>
+<br />
+
+<%= render 'users/password/edit' %>
+
