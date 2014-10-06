@@ -1,1 +1,0 @@
-$uploader = AvatarUploader.new
