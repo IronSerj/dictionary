@@ -23,7 +23,9 @@ class User < ActiveRecord::Base
   acts_as_authentic
   mount_uploader :avatar, AvatarUploader
   attr_accessible :login, :avatar, :as => :user_update
-  attr_accessible :login, :avatar, :password, :password_confirmation, :email, :registration_confirmed, :last_used_lang
+  attr_accessible :login, :avatar, :password, :password_confirmation, :email, :registration_confirmed, :last_used_lang, :avatar_cache
+
+  #validates :email, format: {with: /.+@.+\..+/, message: "is invalid."}
 
 
   before_create do
@@ -44,7 +46,7 @@ class User < ActiveRecord::Base
 
 private  
   def init_verification
-  	self.update_all(:registration_confirmed => false) if self.registration_confirmed
+  	self.update_column(:registration_confirmed, false) if self.registration_confirmed
     UserMailer.verification_email(self).deliver
   end
 end

@@ -4,20 +4,14 @@ class Users::PasswordController < Users::BaseController
     require_user
     authorize! :update, requested_user
     if requested_user.valid_password?(params[:user][:current_password])
-      if requested_user.update_attributes(user_params)
+      if requested_user.update_attributes(params[:user])
         flash[:notice] = "Account updated!"
         redirect_to user_url(requested_user)
       else
-        redirect_to edit_user_url(requested_user)
+        render "users/edit"
       end
     else
-      redirect_to edit_user_url(requested_user)
+      render "users/edit"
     end
-  end
-
-private
-
-  def user_params
-    params[:user].delete_if {|key, value| key == "current_password"}
   end
 end

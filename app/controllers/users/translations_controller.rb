@@ -14,8 +14,7 @@ class Users::TranslationsController < Users::BaseController
     require_user
     authorize! :create, Translation.new.user = requested_user
     unless requested_user.translations.get_translations(params[:translation])
-      render :action => :new
-      return
+      render :action => :new and return
     end
     render :action => :index
   end
