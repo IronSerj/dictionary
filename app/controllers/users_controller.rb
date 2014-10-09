@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
-  include  ActiveModel::MassAssignmentSecurity
   helper_method :requested_user, :user
-  attr_accessible :login, :avatar, :password, :password_confirmation, :email, :as => :user
-  attr_accessible :login, :avatar, :as => :user_update
 
   def new
     require_no_user
@@ -14,7 +11,7 @@ class UsersController < ApplicationController
   
   def create
     require_no_user
-    @user = User.new(params[:user], :as => :user)
+    @user = User.new(params[:user])
     if @user.save
       flash[:notice] = "Account registered!"
       UserSession.new(@user).save
@@ -43,7 +40,7 @@ class UsersController < ApplicationController
     authorize! :update, requested_user
     if requested_user.update_attributes(params[:user], :as => :user_update)
       flash[:notice] = "Account updated!"
-      redirect_to user_url
+      redirect_to user_url(requested_user)
     else
       render :action => :edit
     end

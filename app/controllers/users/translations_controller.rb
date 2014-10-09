@@ -1,5 +1,5 @@
 class Users::TranslationsController < Users::BaseController
-  helper_method :translations, :translation, :new_translation
+  helper_method :translations, :translation, :lang
 
   def index
     require_user
@@ -7,19 +7,18 @@ class Users::TranslationsController < Users::BaseController
 
   def new
     require_user
-    authorize! :update, requested_user
+    authorize! :create, Translation.new.user = requested_user
   end
 
   def create
     require_user
-    authorize! :update, requested_user
-    i = Translation.get_translations(params[:translation], requested_user)
-    if i[0]
-      redirect_to user_translation_path(requested_user, i[0])
-    else
-      @new_translation = Translation.new(params[:translation])
+    authorize! :create, Translation.new.user = requested_user
+    unless requested_user.translations.get_translations(params[:translation], requested_user.id)
+      @lang = params[:translation][:lang]
       render :action => :new
+      return
     end
+    render :action => :index
   end
 
   def edit
@@ -54,8 +53,7 @@ private
     @translation = TranslationDecorator.decorate(requested_user.translations.find(params[:id]))
   end
 
-  def new_translation
-    return @new_translation if defined?(@new_translation)
-    @new_translation = Translation.new
+  def lang
+    return @lang if defined?(@lang)
   end
 end

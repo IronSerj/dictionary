@@ -1,26 +1,21 @@
 class Users::PasswordController < Users::BaseController
-  include  ActiveModel::MassAssignmentSecurity
-  attr_accessible :password, :password_confirmation, :email, :as => :user
 
   def update
     require_user
     authorize! :update, requested_user
     if requested_user.valid_password?(params[:user][:current_password])
-      if requested_user.update_attributes(user_params, :as => :user)
+      if requested_user.update_attributes(user_params)
         flash[:notice] = "Account updated!"
-        redirect_to user_url
+        redirect_to user_url(requested_user)
       else
-        redirect_to edit_user_url
+        redirect_to edit_user_url(requested_user)
       end
     else
-      redirect_to edit_user_path(requested_user)
+      redirect_to edit_user_url(requested_user)
     end
   end
 
 private
-  def requested_user
-    requested_user_by_id(params[:id])
-  end
 
   def user_params
     params[:user].delete_if {|key, value| key == "current_password"}
