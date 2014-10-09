@@ -1,9 +1,9 @@
 <h1>New interpretation</h1>
 
-<%= form_for :translation, url: user_translations_path(current_user) do |i| %>
+<%= form_for :translation, url: user_translations_path(requested_user) do |i| %>
   <p>
     <%= i.label :lang %><br>
-    <%= i.select("lang", $langs, selected: lang) %>
+    <%= i.select("lang", $langs, selected: requested_user.last_used_lang) %>
   </p>
  
   <p>

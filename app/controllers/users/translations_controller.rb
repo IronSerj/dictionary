@@ -13,8 +13,7 @@ class Users::TranslationsController < Users::BaseController
   def create
     require_user
     authorize! :create, Translation.new.user = requested_user
-    unless requested_user.translations.get_translations(params[:translation], requested_user.id)
-      @lang = params[:translation][:lang]
+    unless requested_user.translations.get_translations(params[:translation])
       render :action => :new
       return
     end
@@ -51,9 +50,5 @@ private
   def translation
     return @translation if defined?(@translation)
     @translation = TranslationDecorator.decorate(requested_user.translations.find(params[:id]))
-  end
-
-  def lang
-    return @lang if defined?(@lang)
   end
 end

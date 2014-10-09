@@ -8,7 +8,10 @@
   <%= f.text_field :login %><br />
   <br />
   <%= f.label "Avatar" %><br />
+  <%= image_tag(@user.avatar_url) if requested_user.avatar? %>
   <%= f.file_field :avatar %><br />
+  <%= f.hidden_field :avatar_cache %>
+
   <br />
   <%= f.submit "Update" %>
 <% end %>
