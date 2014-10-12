@@ -56,6 +56,13 @@ class User < ActiveRecord::Base
     self.email == nil
   end
 
+  def get_guest_history(guest_user)
+    guest_user.translations.each do |t|
+      t.user = self
+      t.save
+    end
+  end
+
 protected
   def crypt(str)
     SCrypt::Password.create(str)

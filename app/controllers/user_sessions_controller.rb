@@ -10,7 +10,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       if guest_user
-        current_user.translations << guest_user.translations
+        current_user.get_guest_history(guest_user)
         guest_user.destroy
       end
       flash[:notice] = "Login successful!"
