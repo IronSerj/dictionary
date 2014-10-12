@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'users#index'
+  root 'users/translations#new'
 
   resource :session, controller: "user_sessions", only: [:create, :destroy]
   get 'session', to: 'user_sessions#new'

@@ -12,22 +12,29 @@ class ApplicationController < ActionController::Base
       return @current_user if defined?(@current_user)
       @current_user = current_user_session && current_user_session.record
     end
-    
+
     def require_user
-      unless current_user
+      unless current_user && !current_user.guest?
         store_location
         flash[:notice] = "You must be logged in to access this page"
-        redirect_to session_path
+        redirect_back_or_default session_path
         return false
       end
     end
 
+    def require_guest_user
+      unless current_user
+        @current_user = User.new.guest
+        UserSession.new(@current_user).save
+        redirect_to new_user_translation_path(@current_user)
+      end
+    end
+
     def require_no_user
-      if current_user
+      if current_user && !current_user.guest?
         store_location
         flash[:notice] = "You must be logged out to access this page"
         redirect_to user_path(current_user)
-        return false
       end
     end
     

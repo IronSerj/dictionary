@@ -23,17 +23,25 @@ class User < ActiveRecord::Base
   acts_as_authentic
   mount_uploader :avatar, AvatarUploader
   attr_accessible :login, :avatar, :as => :user_update
-  attr_accessible :login, :avatar, :password, :password_confirmation, :email, :registration_confirmed, :last_used_lang, :avatar_cache
+  attr_accessible :login, :avatar, :password, :password_confirmation, :email, :registration_confirmed, :last_used_lang, :avatar_cache, :guest
 
-  #validates :email, format: {with: /.+@.+\..+/, message: "is invalid."}
-
+  def guest
+    if self.new_record?
+      str_time = "#{Date.today}#{Time.now}"
+      self.login = str_time
+      self.password = crypt(str_time)
+      self.password_confirmation = crypt(str_time)
+      self.save(:validate => false)
+      self
+    end
+  end
 
   before_create do
-    self.verification_token = SCrypt::Password.create(self.email)
+    self.verification_token = crypt(self.email)
   end
 
   after_save do
-    init_verification if self.email_changed?
+    init_verification if self.email_changed? && !self.guest?
   end
 
   def update_last_used_lang(lang)
@@ -42,6 +50,15 @@ class User < ActiveRecord::Base
 
   def verify_email
     self.update_attributes(:registration_confirmed => true)
+  end
+
+  def guest?
+    self.email == nil
+  end
+
+protected
+  def crypt(str)
+    SCrypt::Password.create(str)
   end
 
 private  

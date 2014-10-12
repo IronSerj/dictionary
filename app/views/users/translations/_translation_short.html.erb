@@ -3,5 +3,5 @@
 <p> <%= link_to "Show", user_translation_path(requested_user, tr) %> </p>
 
 <% if can? :delete, tr %>
-	<p> <%= link_to "Delete", user_translation_path(requested_user, tr), :method => :delete %> </p>
+  <p> <%= link_to "Delete", user_translation_path(requested_user, tr), :method => :delete %> </p>
 <% end %>

@@ -6,8 +6,13 @@ class UserSessionsController < ApplicationController
   
   def create
     require_no_user
+    guest_user = current_user if current_user
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
+      if guest_user
+        current_user.translations << guest_user.translations
+        guest_user.destroy
+      end
       flash[:notice] = "Login successful!"
       redirect_back_or_default session_path
     else

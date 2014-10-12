@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009193851) do
+ActiveRecord::Schema.define(version: 20141012184721) do
 
   create_table "translations", force: true do |t|
     t.integer  "user_id"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20141009193851) do
   create_table "users", force: true do |t|
     t.string   "login",                                  null: false
     t.string   "crypted_password",                       null: false
-    t.string   "email",                                  null: false
+    t.string   "email"
     t.boolean  "registration_confirmed", default: false
     t.string   "verification_token",                     null: false
     t.string   "password_salt",                          null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20141009193851) do
     t.datetime "updated_at"
     t.string   "avatar"
     t.string   "last_used_lang"
+    t.boolean  "guest",                  default: false
   end
 
 end
