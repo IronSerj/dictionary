@@ -13,7 +13,7 @@ class Users::TranslationsController < Users::BaseController
   def create
     require_guest_user
     authorize! :create, translation
-    unless requested_user.translations.get_translations(params[:translation])
+    unless requested_user.get_translations(params[:translation])
       render :action => :new and return
     end
     render :action => :index
@@ -30,16 +30,8 @@ class Users::TranslationsController < Users::BaseController
     redirect_to user_translations_path(requested_user)
   end
 
+
 private
-
-  def requested_user
-    if params[:user_id]
-      super
-    else
-      current_user
-    end
-  end
-
   def translations
     TranslationDecorator.decorate_collection(requested_user.translations)
   end
@@ -50,7 +42,7 @@ private
       @translation = TranslationDecorator.decorate(requested_user.translations.find(params[:id]))
     else
       @translation = Translation.new
-      @translation.user = requested_user
+      @translation.set_user(requested_user)
       @translation
     end
   end

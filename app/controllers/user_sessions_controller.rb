@@ -6,13 +6,9 @@ class UserSessionsController < ApplicationController
   
   def create
     require_no_user
-    guest_user = current_user if current_user
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      if guest_user
-        current_user.get_guest_history(guest_user)
-        guest_user.destroy
-      end
+      move_guest_history
       flash[:notice] = "Login successful!"
       redirect_back_or_default session_path
     else

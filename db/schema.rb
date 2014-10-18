@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012184721) do
+ActiveRecord::Schema.define(version: 20141016164547) do
 
   create_table "translations", force: true do |t|
     t.integer  "user_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20141012184721) do
     t.string   "examples"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "guest_uuid"
   end
 
   create_table "users", force: true do |t|

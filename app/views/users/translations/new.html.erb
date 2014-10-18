@@ -1,6 +1,7 @@
+<%= link_to "All interpretations", user_translations_path(requested_user) %> 
 <h1>New interpretation</h1>
 
-<%= form_for :translation, url: user_translations_path(requested_user) do |i| %>
+<%= form_for translation, url: user_translations_path(requested_user) do |i| %>
   <p>
     <%= i.label :lang %><br>
     <%= i.select("lang", $langs, selected: requested_user.last_used_lang) %>

@@ -1,3 +1,4 @@
+<%= link_to "All interpretations", user_translations_path(requested_user) %> 
 <p>Lang: <%= translation.lang %> </p>
 <p>Text: <%= translation.text %> </p>
 <p>Translation: <%= translation.translations %> </p>
@@ -10,11 +11,4 @@
   <% if can? :update, translation %>
     <%= link_to "Delete", user_translation_path(requested_user, translation), :method => :delete %> </p>
   <% end %>
-<p>
-  <% if can? :update, requested_user %>
-    <%= link_to "New translation", new_user_translation_path(requested_user) %>
-  <% end %>
-</p>
-<p> 
-  <%= link_to "All translations", user_translations_path(requested_user) %> 
 </p>

@@ -1,6 +1,3 @@
-<% if can?(:update, translation) && !requested_user.guest? %>
-  <%= link_to "New translation", new_user_translation_path(requested_user) %>
-<% end %>
 <% translations.each do |tr|%>
   <p><%= render partial: "translation_short", locals: {tr: tr} %></p>
 <% end %>

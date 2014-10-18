@@ -12,13 +12,9 @@ class UsersController < ApplicationController
   def create
     require_no_user
     @user = User.new(params[:user])
-    if @user.valid?
-      if current_user
-        current_user.update_attributes(params[:user])
-      else
-        @user.save
-        UserSession.new(@user).save
-      end
+    if @user.save
+      UserSession.new(@user).save
+      move_guest_history
       flash[:notice] = "Account registered!"
     else
       render :action => :new
