@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def verify
     user = User.find_by(verification_token: params[:token])
     user.verify_email
-    UserSession.new(user).save
+    sign_user_in(user)
   end
   
   def show

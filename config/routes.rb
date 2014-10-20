@@ -12,4 +12,5 @@ Rails.application.routes.draw do
     end
   end
   get '/users/verification/:token' => 'users#verify', as: 'verification'
+  get '/auth/:provider/callback', :to => 'auth#callback'
 end

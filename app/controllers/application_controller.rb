@@ -58,6 +58,13 @@ class ApplicationController < ActionController::Base
       @requested_user = User.find(id)
     end
 
+    def sign_user_in(user)
+      if UserSession.new(user).save
+        move_guest_history
+        true
+      end
+    end
+
     def move_guest_history
       if session[:session_uuid] && current_user_session
         current_user.add_guest_history(session[:session_uuid])

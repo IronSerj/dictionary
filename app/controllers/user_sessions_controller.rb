@@ -28,4 +28,8 @@ private
     return @user_session if defined?(@user_session)
     @user_session = UserSession.new
   end
+
+  def auth_hash
+    request.env['omniauth.auth']
+  end
 end

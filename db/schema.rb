@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016164547) do
+ActiveRecord::Schema.define(version: 20141020215852) do
+
+  create_table "authentications", force: true do |t|
+    t.integer  "user_id"
+    t.string   "authentication_uid"
+    t.string   "authentication_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "translations", force: true do |t|
     t.integer  "user_id"
@@ -45,6 +53,7 @@ ActiveRecord::Schema.define(version: 20141016164547) do
     t.string   "avatar"
     t.string   "last_used_lang"
     t.boolean  "guest",                  default: false
+    t.boolean  "created_by_omniauth",    default: false
   end
 
 end

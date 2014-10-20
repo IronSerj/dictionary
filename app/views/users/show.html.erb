@@ -1,3 +1,4 @@
+<p> <%= link_to "All interpretations", user_translations_path(requested_user) %></p>
 <% if can? :update, requested_user %>
   <% unless requested_user.registration_confirmed %>
     <p> EMAIL NOT VERIFIED! </p>
@@ -53,4 +54,4 @@
     <%= link_to "Edit #{requested_user.login}", edit_user_path(requested_user) %> 
   </p>
 <% end %>
-<p> <%= link_to "All interpretations", user_translations_path(current_user) %></p>
+

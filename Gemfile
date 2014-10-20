@@ -42,4 +42,4 @@ gem 'carrierwave'
 
 gem 'protected_attributes'
 
-
+gem 'omniauth-github'
